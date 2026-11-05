@@ -1,0 +1,49 @@
+services:
+  - type: worker
+    name: economy-news-bot
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    autoDeploy: true
+    disk:
+      name: bot-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: DATA_DIR
+        value: /var/data
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: SOURCE_CHANNEL
+        value: ForexBreakingNews
+      - key: SOURCE_MODE
+        value: web
+      - key: POLL_SECONDS
+        value: "15"
+      - key: AI_PROVIDER
+        value: gemini
+      - key: GEMINI_MODELS
+        value: gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash-lite
+      - key: REVIEW_MODE
+        value: all
+      - key: REVIEW_PROVIDER
+        value: deepseek
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: SHOW_SCENARIOS
+        value: "true"
+      - key: AI_MIN_INTERVAL_SEC
+        value: "4"
+      - key: HASHTAGS
+        value: "#EconomyTrader #ايكونومي_تريدر"
+      - key: BOT_TOKEN
+        sync: false
+      - key: TARGET_CHANNEL
+        sync: false
+      - key: ADMIN_IDS
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false

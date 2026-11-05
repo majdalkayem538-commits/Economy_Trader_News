@@ -1,0 +1,16 @@
+[Unit]
+Description=Economy Trader news bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=botuser
+WorkingDirectory=/home/botuser/economy-news-bot
+ExecStart=/home/botuser/economy-news-bot/venv/bin/python bot.py
+Restart=always
+RestartSec=10
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
